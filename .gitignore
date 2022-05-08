@@ -1,0 +1,4 @@
+.ipynb_checkpoints
+__pycache__
+.Rhistory
+data/raw_xml_data/
