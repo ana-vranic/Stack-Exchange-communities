@@ -33,6 +33,6 @@ do
 
     a_file="${csv_loc}/${name}_answers.csv"  
     csv_file="${csv_loc}/${name}_acc_answers.csv"  
-    python filter_acc.py  ${q_file} ${a_file} ${csv_file}
+    python filter_acc_answers.py  ${q_file} ${a_file} ${csv_file}
   
 done
