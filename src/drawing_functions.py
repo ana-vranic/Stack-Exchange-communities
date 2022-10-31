@@ -5,7 +5,7 @@ import seaborn as sns
 import numpy as np
 
 # single panel plot
-def single_panel_plot(data, community_name, y_column_name, color_dict, y_label, x_label = 'Time [days]', x_column_name=None, lines_s=None, marker_s=None, marker_fill = None, markers_on=None, xticks_size=None):
+def single_panel_plot(data, community_name, y_column_name, color_dict, y_label, x_label = 'Time [days]', x_column_name=None, lines_s=None, marker_s=None, marker_fill = None, markers_on=None, xticks_size=None, ylim=None):
     '''
     '''
     comms = [key for key in data.keys() if community_name in key]
@@ -41,7 +41,7 @@ def single_panel_plot(data, community_name, y_column_name, color_dict, y_label, 
         
             
         if x_column_name==None:
-            plt.plot(data[comm][y_column_name], ls=ls, lw = 2, label = status, color = color_dict[community_name])
+            plt.plot(data[comm][y_column_name], ls=ls, lw = 2, label = status, color = color_dict[community_name])    
         else:
             plt.plot(data[comm][x_column_name], data[comm][y_column_name], ls=ls, lw = 2, label = status, marker=ms, markevery=markers_on, markersize=10, fillstyle=mf, color = color_dict[community_name])
     plt.legend(fontsize=12)
@@ -52,17 +52,26 @@ def single_panel_plot(data, community_name, y_column_name, color_dict, y_label, 
     plt.yticks(fontsize=12)
     plt.ylabel(y_label,fontsize=14)
     plt.xlabel(x_label,fontsize=14)
+    
+    if ylim!=None:
+        plt.ylim(ymin=ylim[0], ymax=ylim[1])
 
     
     
 # single variable plot
 # 2 x 2
 
-def single_variable_plot_square(data, column_name, color_dict, y_label, x_label = 'Time [days]',):
+def single_variable_plot_square(data, column_name, color_dict, y_label, x_label = 'Time [days]', ylim=None):
     plt.figure(figsize = (10,8))
     
+    if len(ylim)>1:
+        ylimp=ylim[0]; ylime=ylim[1]; ylima=ylim[2]; yliml=ylim[3]
+    else:
+        ylimp=ylim[0]; ylime=ylim[0]; ylima=ylim[0]; yliml=ylim[0]
+    
+    
     plt.subplot(2,2,1)
-    single_panel_plot(data,'physics',column_name,color_dict, y_label, x_label='')
+    single_panel_plot(data,'physics',column_name,color_dict, y_label, x_label='', ylim=ylimp)
     #plt.legend(['Beta','Area 51'],fontsize=12)
     plt.title('Physics',fontsize=18)
     plt.ylabel(y_label,fontsize=16)
@@ -70,13 +79,13 @@ def single_variable_plot_square(data, column_name, color_dict, y_label, x_label 
     #plt.ylim(0)
     
     plt.subplot(2,2,2)
-    single_panel_plot(data,'economics',column_name,color_dict, '', '')
+    single_panel_plot(data,'economics',column_name,color_dict, '', '', ylim=ylime)
     plt.legend().set_visible(False)
     plt.title('Economics',fontsize=18)
     #plt.ylim(0)
     
     plt.subplot(2,2,3)
-    single_panel_plot(data,'astronomy',column_name,color_dict, y_label, x_label)
+    single_panel_plot(data,'astronomy',column_name,color_dict, y_label, x_label, ylim=ylima)
     plt.legend().set_visible(False)
     plt.title('Astronomy',fontsize=18)
     plt.ylabel(y_label,fontsize=16)
@@ -84,7 +93,7 @@ def single_variable_plot_square(data, column_name, color_dict, y_label, x_label 
     #plt.ylim(0)
     
     plt.subplot(2,2,4)
-    single_panel_plot(data,'literature',column_name,color_dict, '', x_label)
+    single_panel_plot(data,'literature',column_name,color_dict, '', x_label, ylim=yliml)
     plt.legend().set_visible(False)
     plt.title('Literature',fontsize=18)
     plt.xlabel(x_label,fontsize=16)
@@ -150,44 +159,44 @@ def single_variable_plot_row(data, column_name, color_dict,y_label,x_label='Time
 # two variable plot
 # 2 x 4
 
-def two_vars_plot_rows(data, column_name1, column_name2, color_dict, y1_label, y2_label,x_label='Time [days]'):
+def two_vars_plot_rows(data, column_name1, column_name2, color_dict, y1_label, y2_label,x_label='Time [days]', ylim1=None, ylim2=None):
     plt.figure(figsize = (15,6))
     
     plt.subplot(2,4,1)
-    single_panel_plot(data,'physics',column_name1,color_dict,y1_label,'')
+    single_panel_plot(data,'physics',column_name1,color_dict,y1_label,'', ylim=ylim1)
     plt.title('Physics',fontsize=14)
     #plt.legend(['Beta','Area 51'],fontsize=12,loc='upper left')
 
     
     plt.subplot(2,4,2)
-    single_panel_plot(data,'economics',column_name1,color_dict,'','')
+    single_panel_plot(data,'economics',column_name1,color_dict,'','', ylim=ylim1)
     plt.title('Economics',fontsize=14)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,3)
-    single_panel_plot(data,'astronomy',column_name1,color_dict,'','')
+    single_panel_plot(data,'astronomy',column_name1,color_dict,'','', ylim=ylim1)
     plt.title('Astronomy',fontsize=14)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,4)
-    single_panel_plot(data,'literature',column_name1,color_dict,'','')
+    single_panel_plot(data,'literature',column_name1,color_dict,'','', ylim=ylim1)
     plt.title('Literature',fontsize=14)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,5)
-    single_panel_plot(data,'physics',column_name2,color_dict,y2_label)
+    single_panel_plot(data,'physics',column_name2,color_dict,y2_label, ylim=ylim2)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,6)
-    single_panel_plot(data,'economics',column_name2,color_dict,'',x_label)
+    single_panel_plot(data,'economics',column_name2,color_dict,'',x_label, ylim=ylim2)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,7)
-    single_panel_plot(data,'astronomy',column_name2,color_dict,'',x_label)
+    single_panel_plot(data,'astronomy',column_name2,color_dict,'',x_label, ylim=ylim2)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,8)
-    single_panel_plot(data,'literature',column_name2,color_dict,'',x_label)
+    single_panel_plot(data,'literature',column_name2,color_dict,'',x_label, ylim=ylim2)
     plt.legend().set_visible(False)
     
 # two variable plot
