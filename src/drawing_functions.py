@@ -162,41 +162,51 @@ def single_variable_plot_row(data, column_name, color_dict,y_label,x_label='Time
 def two_vars_plot_rows(data, column_name1, column_name2, color_dict, y1_label, y2_label,x_label='Time [days]', ylim1=None, ylim2=None):
     plt.figure(figsize = (15,6))
     
+    if len(ylim1)>1:
+        ylimp=ylim1[0]; ylime=ylim1[1]; ylima=ylim1[2]; yliml=ylim1[3]
+    else:
+        ylimp=ylim1[0]; ylime=ylim1[0]; ylima=ylim1[0]; yliml=ylim1[0]
+        
+    if len(ylim2)>1:
+        ylimp2=ylim2[0]; ylime2=ylim2[1]; ylima2=ylim2[2]; yliml2=ylim2[3]
+    else:
+        ylimp2=ylim2[0]; ylime2=ylim2[0]; ylima2=ylim2[0]; yliml2=ylim2[0]
+    
     plt.subplot(2,4,1)
-    single_panel_plot(data,'physics',column_name1,color_dict,y1_label,'', ylim=ylim1)
+    single_panel_plot(data,'physics',column_name1,color_dict,y1_label,'', ylim=ylimp)
     plt.title('Physics',fontsize=14)
     #plt.legend(['Beta','Area 51'],fontsize=12,loc='upper left')
 
     
     plt.subplot(2,4,2)
-    single_panel_plot(data,'economics',column_name1,color_dict,'','', ylim=ylim1)
+    single_panel_plot(data,'economics',column_name1,color_dict,'','', ylim=ylime)
     plt.title('Economics',fontsize=14)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,3)
-    single_panel_plot(data,'astronomy',column_name1,color_dict,'','', ylim=ylim1)
+    single_panel_plot(data,'astronomy',column_name1,color_dict,'','', ylim=ylima)
     plt.title('Astronomy',fontsize=14)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,4)
-    single_panel_plot(data,'literature',column_name1,color_dict,'','', ylim=ylim1)
+    single_panel_plot(data,'literature',column_name1,color_dict,'','', ylim=yliml)
     plt.title('Literature',fontsize=14)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,5)
-    single_panel_plot(data,'physics',column_name2,color_dict,y2_label, ylim=ylim2)
+    single_panel_plot(data,'physics',column_name2,color_dict,y2_label, ylim=ylimp2)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,6)
-    single_panel_plot(data,'economics',column_name2,color_dict,'',x_label, ylim=ylim2)
+    single_panel_plot(data,'economics',column_name2,color_dict,'',x_label, ylim=ylime2)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,7)
-    single_panel_plot(data,'astronomy',column_name2,color_dict,'',x_label, ylim=ylim2)
+    single_panel_plot(data,'astronomy',column_name2,color_dict,'',x_label, ylim=ylima2)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,8)
-    single_panel_plot(data,'literature',column_name2,color_dict,'',x_label, ylim=ylim2)
+    single_panel_plot(data,'literature',column_name2,color_dict,'',x_label, ylim=yliml2)
     plt.legend().set_visible(False)
     
 # two variable plot
