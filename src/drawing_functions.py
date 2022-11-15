@@ -64,40 +64,37 @@ def single_panel_plot(data, community_name, y_column_name, color_dict, y_label, 
 def single_variable_plot_square(data, column_name, color_dict, y_label, x_label = 'Time [days]', ylim=None):
     plt.figure(figsize = (10,8))
     
-    if len(ylim)>1:
-        ylimp=ylim[0]; ylime=ylim[1]; ylima=ylim[2]; yliml=ylim[3]
-    else:
-        ylimp=ylim[0]; ylime=ylim[0]; ylima=ylim[0]; yliml=ylim[0]
+    if ylim!=None:
+    
+        if len(ylim)>1:
+            ylimp=ylim[0]; yliml=ylim[1]; ylima=ylim[2]; ylime=ylim[3]
+        else:
+            ylimp=ylim[0]; ylime=ylim[0]; ylima=ylim[0]; yliml=ylim[0]
+            
+    else: 
+        ylimp=None; ylime=None; ylima=None; yliml=None
     
     
     plt.subplot(2,2,1)
     single_panel_plot(data,'physics',column_name,color_dict, y_label, x_label='', ylim=ylimp)
-    #plt.legend(['Beta','Area 51'],fontsize=12)
     plt.title('Physics',fontsize=18)
-    plt.ylabel(y_label,fontsize=16)
-
-    #plt.ylim(0)
     
     plt.subplot(2,2,2)
-    single_panel_plot(data,'economics',column_name,color_dict, '', '', ylim=ylime)
+    single_panel_plot(data,'literature',column_name,color_dict, '', '', ylim=yliml)
     plt.legend().set_visible(False)
-    plt.title('Economics',fontsize=18)
-    #plt.ylim(0)
+    plt.title('Literature',fontsize=18)
+    
     
     plt.subplot(2,2,3)
     single_panel_plot(data,'astronomy',column_name,color_dict, y_label, x_label, ylim=ylima)
     plt.legend().set_visible(False)
     plt.title('Astronomy',fontsize=18)
-    plt.ylabel(y_label,fontsize=16)
-    plt.xlabel(x_label,fontsize=16)
-    #plt.ylim(0)
     
     plt.subplot(2,2,4)
-    single_panel_plot(data,'literature',column_name,color_dict, '', x_label, ylim=yliml)
+    single_panel_plot(data,'economics',column_name,color_dict, '', x_label=x_label, ylim=ylime)
     plt.legend().set_visible(False)
-    plt.title('Literature',fontsize=18)
-    plt.xlabel(x_label,fontsize=16)
-    #plt.ylim(0)
+    plt.title('Economics',fontsize=18)
+
     
     
 # single variable plot
@@ -132,28 +129,41 @@ def single_variable_plot_column(data, column_name, color_dict,y_label,x_label='T
 # single variable plot
 # 1 x 4
 
-def single_variable_plot_row(data, column_name, color_dict,y_label,x_label='Time [days]', x_column_name=None, xticks_size=None):
+def single_variable_plot_row(data, column_name, color_dict,y_label,x_label='Time [days]', x_column_name=None, xticks_size=None, ylim=None):
     plt.figure(figsize = (18,4))
     
+    if ylim!=None:
+
+        if len(ylim)>1:
+            ylimp=ylim[0]; yliml=ylim[1]; ylima=ylim[2]; ylime=ylim[3]
+        else:
+            ylimp=ylim[0]; ylime=ylim[0]; ylima=ylim[0]; yliml=ylim[0]
+            
+    else: 
+        ylimp=None; ylime=None; ylima=None; yliml=None
+    
     plt.subplot(1,4,1)
-    single_panel_plot(data,'physics',column_name,color_dict, y_label, x_label=x_label, x_column_name=x_column_name, xticks_size=xticks_size)
+    single_panel_plot(data,'physics',column_name,color_dict, y_label, x_label=x_label, x_column_name=x_column_name, xticks_size=xticks_size, ylim=ylimp)
     #plt.legend().set_visible(False)
     plt.title('Physics',fontsize=16)
     
     plt.subplot(1,4,2)
-    single_panel_plot(data,'economics',column_name,color_dict,'',x_label, x_column_name=x_column_name, xticks_size=xticks_size)
+    single_panel_plot(data,'literature',column_name,color_dict,'',x_label, x_column_name=x_column_name, xticks_size=xticks_size, ylim=yliml)
     plt.legend().set_visible(False)
-    plt.title('Economics',fontsize=16)
+    plt.title('Literature',fontsize=16)
+    
     
     plt.subplot(1,4,3)
-    single_panel_plot(data,'astronomy',column_name,color_dict,'',x_label, x_column_name=x_column_name, xticks_size=xticks_size)
+    single_panel_plot(data,'astronomy',column_name,color_dict,'',x_label, x_column_name=x_column_name, xticks_size=xticks_size, ylim=ylima)
     plt.legend().set_visible(False)
     plt.title('Astronomy',fontsize=16)
     
+    
     plt.subplot(1,4,4)
-    single_panel_plot(data,'literature',column_name,color_dict,'',x_label, x_column_name=x_column_name, xticks_size=xticks_size)
+    single_panel_plot(data,'economics',column_name,color_dict,'',x_label, x_column_name=x_column_name, xticks_size=xticks_size, ylim=ylime)
     plt.legend().set_visible(False)
-    plt.title('Literature',fontsize=16)
+    plt.title('Economics',fontsize=16)
+
     
     
 # two variable plot
@@ -161,16 +171,21 @@ def single_variable_plot_row(data, column_name, color_dict,y_label,x_label='Time
 
 def two_vars_plot_rows(data, column_name1, column_name2, color_dict, y1_label, y2_label,x_label='Time [days]', ylim1=None, ylim2=None):
     plt.figure(figsize = (15,6))
-    
-    if len(ylim1)>1:
-        ylimp=ylim1[0]; ylime=ylim1[1]; ylima=ylim1[2]; yliml=ylim1[3]
-    else:
-        ylimp=ylim1[0]; ylime=ylim1[0]; ylima=ylim1[0]; yliml=ylim1[0]
-        
-    if len(ylim2)>1:
-        ylimp2=ylim2[0]; ylime2=ylim2[1]; ylima2=ylim2[2]; yliml2=ylim2[3]
-    else:
-        ylimp2=ylim2[0]; ylime2=ylim2[0]; ylima2=ylim2[0]; yliml2=ylim2[0]
+    if ylim1!=None:
+        if len(ylim1)>1:
+            ylimp=ylim1[0]; yliml=ylim1[1]; ylima=ylim1[2]; ylime=ylim1[3]
+        else:
+            ylimp=ylim1[0]; ylime=ylim1[0]; ylima=ylim1[0]; yliml=ylim1[0]
+            
+    else: 
+        ylimp=None; ylime=None; ylima=None; yliml=None
+    if ylim2!=None:
+        if len(ylim2)>1:
+            ylimp2=ylim2[0]; yliml2=ylim2[1]; ylima2=ylim2[2]; ylime2=ylim2[3]
+        else:
+            ylimp2=ylim2[0]; ylime2=ylim2[0]; ylima2=ylim2[0]; yliml2=ylim2[0]
+    else: 
+        ylimp2=None; ylime2=None; ylima2=None; yliml2=None
     
     plt.subplot(2,4,1)
     single_panel_plot(data,'physics',column_name1,color_dict,y1_label,'', ylim=ylimp)
@@ -179,8 +194,8 @@ def two_vars_plot_rows(data, column_name1, column_name2, color_dict, y1_label, y
 
     
     plt.subplot(2,4,2)
-    single_panel_plot(data,'economics',column_name1,color_dict,'','', ylim=ylime)
-    plt.title('Economics',fontsize=14)
+    single_panel_plot(data,'literature',column_name1,color_dict,'','', ylim=yliml)
+    plt.title('Literature',fontsize=14)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,3)
@@ -189,8 +204,8 @@ def two_vars_plot_rows(data, column_name1, column_name2, color_dict, y1_label, y
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,4)
-    single_panel_plot(data,'literature',column_name1,color_dict,'','', ylim=yliml)
-    plt.title('Literature',fontsize=14)
+    single_panel_plot(data,'economics',column_name1,color_dict,'','', ylim=ylime)
+    plt.title('Economics',fontsize=14)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,5)
@@ -198,7 +213,7 @@ def two_vars_plot_rows(data, column_name1, column_name2, color_dict, y1_label, y
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,6)
-    single_panel_plot(data,'economics',column_name2,color_dict,'',x_label, ylim=ylime2)
+    single_panel_plot(data,'literature',column_name2,color_dict,'',x_label, ylim=yliml2)
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,7)
@@ -206,7 +221,7 @@ def two_vars_plot_rows(data, column_name1, column_name2, color_dict, y1_label, y
     plt.legend().set_visible(False)
     
     plt.subplot(2,4,8)
-    single_panel_plot(data,'literature',column_name2,color_dict,'',x_label, ylim=yliml2)
+    single_panel_plot(data,'economics',column_name2,color_dict,'',x_label, ylim=ylime2)
     plt.legend().set_visible(False)
     
 # two variable plot
@@ -256,7 +271,7 @@ def two_vars_plot_cols(data, column_name1, column_name2, color_dict, y1_label, y
 def plot_jaccard(data, colors):
     
     def one_plot(df, colors_dict, x_label, y_label):
-        g = sns.lineplot(data=df,  x="time-delta", y="jaccard", style="name", hue="name", ci='sd', palette=[colors_dict[comm1], colors_dict[comm1]] )
+        g = sns.lineplot(data=df,  x="time-delta", y="jaccard", style="name", hue="name", errorbar='sd', palette=[colors_dict[comm1], colors_dict[comm1]] )
         
         g.legend(fontsize = 12,
                title="",)
@@ -279,17 +294,13 @@ def plot_jaccard(data, colors):
     one_plot(df, colors, r'$|t_i - t_j|$', r'$J(core(t_i), core (t_j))$')
     plt.title("Physics", fontsize=16)
 
-    
-    
     plt.subplot(1,4,2)
-    comm1 = "economics"; comm2 = "052012economics"
+    comm1 = "literature"; comm2 = "052012-literature"
     df1 = data[comm1]; df2=data[comm2]; df = pd.concat([df1, df2]).reset_index()
     one_plot(df, colors, r'$|t_i - t_j|$', '')
-    plt.title("Economics", fontsize=16)
+    plt.title("Literature", fontsize=16)
     plt.legend().set_visible(False)
-
-
-
+    
     plt.subplot(1,4,3)
     comm1 = "astronomy"; comm2 = "052012astronomy"
     df1 = data[comm1]; df2=data[comm2]; df = pd.concat([df1, df2]).reset_index()
@@ -297,14 +308,14 @@ def plot_jaccard(data, colors):
     plt.title("Astronomy", fontsize=16)
     plt.legend().set_visible(False)
 
-
-
     plt.subplot(1,4,4)
-    comm1 = "literature"; comm2 = "052012-literature"
+    comm1 = "economics"; comm2 = "052012economics"
     df1 = data[comm1]; df2=data[comm2]; df = pd.concat([df1, df2]).reset_index()
     one_plot(df, colors, r'$|t_i - t_j|$', '')
-    plt.title("Literature", fontsize=16)
+    plt.title("Economics", fontsize=16)
     plt.legend().set_visible(False)
+
+
 
 
 
@@ -316,9 +327,9 @@ def plot_jaccard_heatmap(data, palette):
     lab = {'052012astronomy':"closed Astronomy",  '052012economics':"closed Economics",  '052012-literature':"closed Literature",  '052012-theoretical-physics':"closed Physics",
                  'astronomy':"Astronomy", 'economics':"Economics", 'literature':"Literature",   'physics':"Physics",  }
 
-    for community in [   'physics', 'economics', 'astronomy', 'literature', 
-                      '052012-theoretical-physics',  '052012economics', 
-                      '052012astronomy',  '052012-literature', 
+    for community in [   'physics', 'literature',   'astronomy', 'economics',
+                      '052012-theoretical-physics', '052012-literature',  
+                      '052012astronomy',  '052012economics', 
                 ]:
         
         plt.subplot(2, 4, i)
@@ -376,7 +387,7 @@ def plot_ensemble_statistics(all_data, colors_dict):
         i+=1
             
             
-def plot_compare_tw(data, column_order, row_order, colors_dict, ylab_order):
+def plot_compare_tw(data, column_order, row_order, colors_dict, ylab_order, ylim=None):
 
     def plot_line(data,col, prop, x_label, y_label, colors_dict):
         communities = list(data[col].keys())
@@ -422,6 +433,9 @@ def plot_compare_tw(data, column_order, row_order, colors_dict, ylab_order):
             else: ylabel=" " 
                 
             plot_line(data, col, row,  xlabel, ylabel, colors_dict )
+            if ylim!=None:
+                yl = ylim[row]
+                plt.ylim(yl[0], yl[1])
             if i!=1: plt.legend().set_visible(False)
             if (i == 1) or (i==2) or (i==3):
                 plt.title("Astronomy: %s days window"%col, fontsize=16)
@@ -431,16 +445,16 @@ def plot_compare_tw(data, column_order, row_order, colors_dict, ylab_order):
             k+=1
             
             
-def plot_active_users_beta(data, colors_dict):
+def plot_active_users_beta(data, colors_dict, ylim=None):
     
     lab = {'052012astronomy':"closed Astronomy",  '052012economics':"closed Economics",  '052012-literature':"closed Literature",  '052012-theoretical-physics':"closed Physics",
                      'astronomy':"Astronomy", 'economics':"Economics", 'literature':"Literature",   'physics':"Physics",  }
 
     plt.figure(figsize=(16, 8))
     i=1
-    for community in [   'physics', 'economics', 'astronomy', 'literature', 
-                          '052012-theoretical-physics',  '052012economics', 
-                          '052012astronomy',  '052012-literature', 
+    for community in [   'physics','literature',   'astronomy',  'economics',
+                          '052012-theoretical-physics',  '052012-literature', 
+                          '052012astronomy',  '052012economics', 
                     ]:
 
         plt.subplot(2,4,i)
@@ -459,19 +473,33 @@ def plot_active_users_beta(data, colors_dict):
                 else:
                     ls= '--'
                 plt.plot(data[community][b], ls=ls, lw=2, color=color, label=r"$\beta=%s$"%b)
-
+        
         plt.title(lab[community], fontsize=16)
         plt.legend(fontsize=12)
         plt.xticks(range(0,180,50), fontsize=12)
         plt.yticks(fontsize=12)
         if i>4: plt.xlabel("Time [days]", fontsize=14)
         if i==1 or i==5: plt.ylabel("Active users", fontsize=14)
+        
+        if ylim!=None:
+            ylimc=ylim[community]
+            plt.ylim(ylimc[0], ylimc[1])
 
         i+=1
         
         
-def two_variable_plot_one_row(data, column_name, column_name2, color_dict, y_label, x_label='Time [days]', x_column_name=None):
+def two_variable_plot_one_row(data, column_name, column_name2, color_dict, y_label, x_label='Time [days]', x_column_name=None, ylim=None):
     plt.figure(figsize = (18,4))
+    
+    if ylim!=None:
+
+        if len(ylim)>1:
+            ylimp=ylim[0]; yliml=ylim[1]; ylima=ylim[2]; ylime=ylim[3]
+        else:
+            ylimp=ylim[0]; ylime=ylim[0]; ylima=ylim[0]; yliml=ylim[0]
+            
+    else: 
+        ylimp=None; ylime=None; ylima=None; yliml=None
     
     lines_s = {'052012astronomy':":",  '052012economics':":",  '052012-literature':":",  '052012-theoretical-physics':":",
                  'astronomy':"-", 'economics':"-", 'literature':"-",   'physics':"-",  }
@@ -489,17 +517,22 @@ def two_variable_plot_one_row(data, column_name, column_name2, color_dict, y_lab
     single_panel_plot(data,'physics',column_name2, color_dict, y_label, x_label=x_label, x_column_name=x_column_name, marker_s= ms2,
                       markers_on=markers_on2, marker_fill=markerfills, lines_s=lines_s)
     plt.legend([ "active - reputation users", "closed - reputation users", "active - permanent users", "closed - permanent users",])
-    #plt.legend().set_visible(False)
-    #plt.legend().set_visible(False)
     plt.title('Physics',fontsize=16)
+    if ylimp!=None:
+        plt.ylim(ylimp[0], ylimp[1])
+    
     
     plt.subplot(1,4,2)
-    single_panel_plot(data,'economics',column_name, color_dict,'',x_label, x_column_name=x_column_name, marker_s = ms1,
+    single_panel_plot(data,'literature',column_name,color_dict,'',x_label, x_column_name=x_column_name, marker_s = ms1,
                       markers_on=markers_on1, marker_fill=markerfills, lines_s=lines_s)
-    single_panel_plot(data,'economics',column_name2, color_dict,'',x_label, x_column_name=x_column_name, marker_s = ms2,
+    single_panel_plot(data,'literature',column_name2,color_dict,'',x_label, x_column_name=x_column_name, marker_s = ms2,
                       markers_on=markers_on2, marker_fill=markerfills, lines_s=lines_s)
     plt.legend().set_visible(False)
-    plt.title('Economics',fontsize=16)
+    plt.title('Literature',fontsize=16)
+    if yliml!=None:
+        plt.ylim(yliml[0], yliml[1])
+    
+
     
     plt.subplot(1,4,3)
     single_panel_plot(data,'astronomy',column_name,color_dict,'',x_label, x_column_name=x_column_name, marker_s = ms1,
@@ -508,14 +541,19 @@ def two_variable_plot_one_row(data, column_name, column_name2, color_dict, y_lab
                       markers_on=markers_on2,marker_fill=markerfills, lines_s=lines_s)
     plt.legend().set_visible(False)
     plt.title('Astronomy',fontsize=16)
+    if ylima!=None:
+        plt.ylim(ylima[0], ylima[1])
     
     plt.subplot(1,4,4)
-    single_panel_plot(data,'literature',column_name,color_dict,'',x_label, x_column_name=x_column_name, marker_s = ms1,
+    single_panel_plot(data,'economics',column_name, color_dict,'',x_label, x_column_name=x_column_name, marker_s = ms1,
                       markers_on=markers_on1, marker_fill=markerfills, lines_s=lines_s)
-    single_panel_plot(data,'literature',column_name2,color_dict,'',x_label, x_column_name=x_column_name, marker_s = ms2,
+    single_panel_plot(data,'economics',column_name2, color_dict,'',x_label, x_column_name=x_column_name, marker_s = ms2,
                       markers_on=markers_on2, marker_fill=markerfills, lines_s=lines_s)
     plt.legend().set_visible(False)
-    plt.title('Literature',fontsize=16)
+    plt.title('Economics',fontsize=16)
+    if ylime!=None:
+        plt.ylim(ylime[0], ylime[1])
+
 
 
 def plot_reputation_decay():
