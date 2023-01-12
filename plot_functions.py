@@ -56,7 +56,7 @@ def plot_8_variables_2row(data_questions, data_nets, data_coreper, data_rep_agg,
     i+=1
     
     
-def comparestartups_2rows(data_rep_agg, data_coreper, comm1, commr1, commr2, colors, legendtext1=["active", "closed", "st1"], legendtext2=["active", "closed", "st2"] ):
+def comparestartups_2rows(data_rep_agg, data_coreper, comm1, commr1, commr2, colors, legendtext1=["active", "closed", "st1"], legendtext2=["active", "closed", "st2"], ylim=None):
     plt.figure(figsize = (18,6))
     plt.subplots_adjust(left=0.1,bottom=0.1,right=0.9,top=0.9,wspace=0.4,hspace=0.4)
     i=1
@@ -65,15 +65,20 @@ def comparestartups_2rows(data_rep_agg, data_coreper, comm1, commr1, commr2, col
     df.single_panel_plot(data_rep_agg, comm1, "Number of active users", colors, "N active users")
     plt.plot(data_rep_agg[commr1]["Number of active users"], ".-", color=colors[commr1], label="startups")
     plt.legend(legendtext1)
-    plt.ylim(ymin=0)
+    if ylim==None:
+        plt.ylim(ymin=0)
+    else:
+        plt.ylim(ymin=0, ymax=ylim[i-1])
     i+=1
 
     plt.subplot(2,4,i)
     df.single_panel_plot(data_rep_agg, comm1, "Mean user reputation", colors, "Mean reputation")
     plt.plot(data_rep_agg[commr1]["Mean user reputation"], ".-", color=colors[commr1], label="startups")
     plt.legend().set_visible(False)
-    plt.ylim(ymin=0)
-
+    if ylim==None:
+        plt.ylim(ymin=0)
+    else:
+        plt.ylim(ymin=0, ymax=ylim[i-1])
     i+=1
 
 
@@ -81,8 +86,10 @@ def comparestartups_2rows(data_rep_agg, data_coreper, comm1, commr1, commr2, col
     df.single_panel_plot(data_coreper, comm1, 'N_core',colors, 'N users in core')
     plt.plot(data_coreper[commr1]["N_core"], ".-", color=colors[commr1], label="startups")
     plt.legend().set_visible(False)
-    plt.ylim(ymin=0)
-
+    if ylim==None:
+        plt.ylim(ymin=0)
+    else:
+        plt.ylim(ymin=0, ymax=ylim[i-1])
     i+=1
 
 
@@ -90,8 +97,10 @@ def comparestartups_2rows(data_rep_agg, data_coreper, comm1, commr1, commr2, col
     df.single_panel_plot(data_coreper, comm1, 'Mean_dr_core',colors, 'Mean reputation \n within core')
     plt.plot(data_coreper[commr1]["Mean_dr_core"], ".-", color=colors[commr1], label="startups")
     plt.legend().set_visible(False)
-    plt.ylim(ymin=0)
-
+    if ylim==None:
+        plt.ylim(ymin=0)
+    else:
+        plt.ylim(ymin=0, ymax=ylim[i-1])
     i+=1
 
 
@@ -99,8 +108,10 @@ def comparestartups_2rows(data_rep_agg, data_coreper, comm1, commr1, commr2, col
     df.single_panel_plot(data_rep_agg, comm1, "Number of active users", colors, "N active users")
     plt.plot(data_rep_agg[commr2]["Number of active users"], ".-", color=colors[commr2], label="startups")
     plt.legend(legendtext2)
-    plt.ylim(ymin=0)
-
+    if ylim==None:
+        plt.ylim(ymin=0)
+    else:
+        plt.ylim(ymin=0, ymax=ylim[i-1])
     i+=1
 
 
@@ -108,8 +119,10 @@ def comparestartups_2rows(data_rep_agg, data_coreper, comm1, commr1, commr2, col
     df.single_panel_plot(data_rep_agg, comm1, "Mean user reputation", colors, "Mean reputation")
     plt.plot(data_rep_agg[commr2]["Mean user reputation"], ".-", color=colors[commr2], label="startups")
     plt.legend().set_visible(False)
-    plt.ylim(ymin=0)
-
+    if ylim==None:
+        plt.ylim(ymin=0)
+    else:
+        plt.ylim(ymin=0, ymax=ylim[i-1])
     i+=1
 
 
@@ -117,8 +130,10 @@ def comparestartups_2rows(data_rep_agg, data_coreper, comm1, commr1, commr2, col
     df.single_panel_plot(data_coreper, "physics", 'N_core',colors, 'N users in core')
     plt.plot(data_coreper[commr2]["N_core"], ".-", color=colors[commr2], label="startups")
     plt.legend().set_visible(False)
-    plt.ylim(ymin=0)
-
+    if ylim==None:
+        plt.ylim(ymin=0)
+    else:
+        plt.ylim(ymin=0, ymax=ylim[i-1])
     i+=1
 
 
@@ -126,8 +141,10 @@ def comparestartups_2rows(data_rep_agg, data_coreper, comm1, commr1, commr2, col
     df.single_panel_plot(data_coreper, "physics", 'Mean_dr_core',colors, 'Mean reputation \n within core')
     plt.plot(data_coreper[commr2]["Mean_dr_core"], ".-", color=colors[commr2], label="startups")
     plt.legend().set_visible(False)
-    plt.ylim(ymin=0)
-
+    if ylim==None:
+        plt.ylim(ymin=0)
+    else:
+        plt.ylim(ymin=0, ymax=ylim[i-1])
     i+=1
 
     
