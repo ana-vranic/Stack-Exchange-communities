@@ -1,5 +1,9 @@
 # StackExchange-communities
 
+This code is used in paper: 
+
+Vranić, A., Tomašević, A., Alorić, A. et al. [Sustainability of Stack Exchange Q&A communities: the role of trust](https://epjdatascience.springeropen.com/articles/10.1140/epjds/s13688-023-00381-x). EPJ Data Sci. 12, 4 (2023). https://doi.org/10.1140/epjds/s13688-023-00381-x
+
 ## Data
 
 Communities are categorized as:
